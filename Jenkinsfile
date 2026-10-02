@@ -59,14 +59,12 @@ pipeline {
                 dir('backend') {
                     sh './mvnw -B package -DskipTests'
                 }
+                archiveArtifacts artifacts: 'backend/target/*.jar', fingerprint: true
             }
         }
     }
 
     post {
-        success {
-            archiveArtifacts artifacts: 'backend/target/*.jar', fingerprint: true
-        }
         always {
             cleanWs()
         }
