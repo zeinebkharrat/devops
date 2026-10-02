@@ -9,6 +9,7 @@ pipeline {
         stage('GIT') {
             steps {
                 checkout scm
+                sh 'chmod +x backend/mvnw'
             }
         }
 
