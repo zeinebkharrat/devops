@@ -38,7 +38,7 @@ pipeline {
             steps {
                 dir('backend') {
                     withSonarQubeEnv(env.SONARQUBE_SERVER) {
-                        sh './mvnw -B sonar:sonar'
+                        sh './mvnw -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar'
                     }
                 }
             }
