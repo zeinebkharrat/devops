@@ -38,7 +38,9 @@ pipeline {
             steps {
                 dir('backend') {
                     withSonarQubeEnv(env.SONARQUBE_SERVER) {
-                        sh './mvnw -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar'
+                        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                            sh './mvnw -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token="$SONAR_TOKEN"'
+                        }
                     }
                 }
             }
